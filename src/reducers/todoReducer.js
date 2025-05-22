@@ -9,6 +9,8 @@ import {
   FETCH_TODOS_FAILURE,
 } from "../actions/todoActions";
 
+import getDate from "../utility/date";
+
 const initialState = {
   todos: [],
   loading: false,
@@ -46,7 +48,7 @@ const todoReducer = (state = initialState, action) => {
         ...state,
         todos: state.todos.map((todo) => {
           return todo.id === action.payload.id
-            ? { ...todo, text: action.payload.text }
+            ? { ...todo, text: action.payload.text,date: getDate() }
             : todo;
         }),
       };

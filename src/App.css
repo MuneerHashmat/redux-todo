@@ -7,14 +7,14 @@
 
 @media (max-width: 1024px){
     .main-container{
-        width: 60vw;
+        width: 65vw;
     }
 }
 
 
 @media (max-width: 768px){
     .main-container{
-        width: 70vw;
+        width: 80vw;
     }
 }
 

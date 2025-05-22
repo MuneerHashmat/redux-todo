@@ -28,6 +28,7 @@ const CreateTodo = () => {
     };
 
     dispatch(addTodo(newTodo));
+    setTextInput("");
   };
 
   return (

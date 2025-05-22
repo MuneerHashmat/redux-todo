@@ -27,13 +27,16 @@
 
 .text-input{
     padding: 10px;
-    font-size: large;
+    font-size: larger;
     background-color: var(--dark-bg);
     border-radius: 10px;
     border: 1px solid var(--brown-primary);
-    outline: none;
     color: var(--light-primary);
     width: 100%;
+}
+
+.text-input:focus{
+    outline: 1px solid var(--brown-light);
 }
 
 .btn-submit{

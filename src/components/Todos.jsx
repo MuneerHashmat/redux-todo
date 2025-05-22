@@ -13,7 +13,7 @@ const Todos = () => {
     dispatch(fetchTodos());
   }, [dispatch]);
 
-  if(error){
+  if (error) {
     toast.error("failed to fetch todos");
     console.log(error);
   }
@@ -26,12 +26,22 @@ const Todos = () => {
     );
   }
 
+  if (todos.length === 0) {
+    return (
+      <div className="no-todos">
+        <hr />
+        <h2>No todos</h2>
+        <hr />
+      </div>
+    );
+  }
+
   return (
     <div className="todo-container">
-    {todos.map((todo)=>(
-        <TodoCard key={todo.id} todo={todo}/>
-    ))}
-  </div>
+      {todos.map((todo) => (
+        <TodoCard key={todo.id} todo={todo} />
+      ))}
+    </div>
   );
 };
 

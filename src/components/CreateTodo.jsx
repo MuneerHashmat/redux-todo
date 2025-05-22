@@ -28,6 +28,7 @@ const CreateTodo = () => {
     };
 
     dispatch(addTodo(newTodo));
+    toast.success("todo created");
     setTextInput("");
   };
 

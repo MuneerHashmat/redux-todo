@@ -53,14 +53,14 @@ export const fetchTodos = () => {
     dispatch(fetchTodosRequest());
     try {
       const response = await fetch(
-        "https://jsonplaceholder.typicode.com/todos?_limit=4"
+        "https://dummyjson.com/todos?limit=3&skip=1"
       );
       const data = await response.json();
-      const initialTodos = data.map((todo) => {
+      const initialTodos = data.todos.map((item) => {
         const currDate = getDate();
         return {
           id: uuidv4(),
-          text: todo.title,
+          text: item.todo,
           editTodo: false,
           isComplete: false,
           date: currDate,

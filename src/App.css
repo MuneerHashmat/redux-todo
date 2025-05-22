@@ -1,0 +1,28 @@
+@import "./variables.css";
+
+.main-container {
+   width: 50vw;
+   margin: 0 auto;
+}
+
+@media (max-width: 1024px){
+    .main-container{
+        width: 60vw;
+    }
+}
+
+
+@media (max-width: 768px){
+    .main-container{
+        width: 70vw;
+    }
+}
+
+
+@media (max-width: 640px){
+    .main-container{
+        width: 95vw;
+    }
+}
+
+

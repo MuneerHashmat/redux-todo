@@ -53,7 +53,7 @@ export const fetchTodos = () => {
     dispatch(fetchTodosRequest());
     try {
       const response = await fetch(
-        "https://jsonplaceholder.typicode.com/todos?_limit=5"
+        "https://jsonplaceholder.typicode.com/todos?_limit=4"
       );
       const data = await response.json();
       const initialTodos = data.map((todo) => {

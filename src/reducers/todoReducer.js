@@ -6,7 +6,7 @@ import {
   TOGGLE_DONE,
   FETCH_TODOS_REQUEST,
   FETCH_TODOS_SUCCESS,
-  FETCH_TODOS_FAILURE
+  FETCH_TODOS_FAILURE,
 } from "../actions/todoActions";
 
 const initialState = {
@@ -61,7 +61,7 @@ const todoReducer = (state = initialState, action) => {
         }),
       };
 
-       case FETCH_TODOS_REQUEST:
+    case FETCH_TODOS_REQUEST:
       return {
         ...state,
         loading: true,

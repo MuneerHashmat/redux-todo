@@ -1,14 +1,30 @@
 import "./Todos.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchTodos } from "../actions/todoActions";
+import { fetchTodos, removeTodo } from "../actions/todoActions";
 import { MoonLoader } from "react-spinners";
 import toast from "react-hot-toast";
 import TodoCard from "./TodoCard";
+import DeleteModal from "./modals/DeleteModal";
 
 const Todos = () => {
   const dispatch = useDispatch();
   const { todos, loading, error } = useSelector((state) => state);
+  const [currId, setCurrId] = useState("");
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  const setId = (id) => {
+    setCurrId(id);
+  };
+
+  const toggleDeleteModal = () => {
+    setIsDeleteModalOpen((prev) => !prev);
+  };
+
+  const deleteTodo = (id) => {
+    dispatch(removeTodo(id));
+  };
+
   useEffect(() => {
     dispatch(fetchTodos());
   }, [dispatch]);
@@ -39,8 +55,19 @@ const Todos = () => {
   return (
     <div className="todo-container">
       {todos.map((todo) => (
-        <TodoCard key={todo.id} todo={todo} />
+        <TodoCard
+          key={todo.id}
+          todo={todo}
+          setId={setId}
+          toggleDeleteModal={toggleDeleteModal}
+        />
       ))}
+      <DeleteModal
+        isDeleteModalOpen={isDeleteModalOpen}
+        currId={currId}
+        deleteTodo={deleteTodo}
+        toggleDeleteModal={toggleDeleteModal}
+      />
     </div>
   );
 };

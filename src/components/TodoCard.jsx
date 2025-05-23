@@ -3,7 +3,6 @@ import "./TodoCard.css";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import {
-  removeTodo,
   toggleDone,
   toggleUpdate,
   updateTodo,
@@ -18,7 +17,7 @@ import {
 } from "lucide-react";
 import toast from "react-hot-toast";
 
-const TodoCard = ({ todo }) => {
+const TodoCard = ({ todo, setId, toggleDeleteModal }) => {
   const dispatch = useDispatch();
   const [editedText, setEditedText] = useState(todo.text);
 
@@ -32,6 +31,12 @@ const TodoCard = ({ todo }) => {
     dispatch(updateTodo(todo.id, text));
     dispatch(toggleUpdate(todo.id));
   };
+
+
+  const handleDelete=()=>{
+    setId(todo.id)
+    toggleDeleteModal();
+  }
   return (
     <div className="todo-card">
       <div className="todo-main">
@@ -94,10 +99,7 @@ const TodoCard = ({ todo }) => {
         )}
 
         <button
-          onClick={() => {
-            dispatch(removeTodo(todo.id));
-            toast.success("todo deleted");
-          }}
+          onClick={handleDelete}
           className="btn-primary delete-btn"
         >
           <Trash2 color="#FF8303" />
@@ -109,6 +111,8 @@ const TodoCard = ({ todo }) => {
 
 TodoCard.propTypes = {
   todo: PropTypes.object,
+  setId: PropTypes.func,
+  toggleDeleteModal: PropTypes.func
 };
 
 export default TodoCard;

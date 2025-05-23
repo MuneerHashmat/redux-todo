@@ -10,9 +10,12 @@ import {
 } from "../actions/todoActions";
 
 import getDate from "../utility/date";
+import { getInitialTodos } from "../utility/localStorage";
+
+const initialTodos = getInitialTodos();
 
 const initialState = {
-  todos: [],
+  todos: initialTodos || [],
   loading: false,
   error: null,
 };
@@ -48,7 +51,7 @@ const todoReducer = (state = initialState, action) => {
         ...state,
         todos: state.todos.map((todo) => {
           return todo.id === action.payload.id
-            ? { ...todo, text: action.payload.text,date: getDate() }
+            ? { ...todo, text: action.payload.text, date: getDate() }
             : todo;
         }),
       };
@@ -71,11 +74,13 @@ const todoReducer = (state = initialState, action) => {
       };
 
     case FETCH_TODOS_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        todos: action.payload,
-      };
+      return action.payload
+        ? {
+            ...state,
+            loading: false,
+            todos: action.payload,
+          }
+        : { ...state, loading: false };
 
     case FETCH_TODOS_FAILURE:
       return {

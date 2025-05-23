@@ -11,4 +11,11 @@ const logger = (store) => (next) => (action) => {
 
 const store = createStore(todoReducer, applyMiddleware(thunk, logger));
 
+store.subscribe(()=>{
+  let state=store.getState();
+  localStorage.setItem("todos",JSON.stringify(state.todos))
+})
+
+
+
 export default store;

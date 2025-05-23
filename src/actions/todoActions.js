@@ -1,5 +1,5 @@
-import { v4 as uuidv4 } from "uuid";
 import getDate from "../utility/date";
+import { isPresentInStorage } from "../utility/localStorage";
 
 export const ADD_TODO = "ADD_TODO";
 export const REMOVE_TODO = "REMOVE_TODO";
@@ -56,10 +56,14 @@ export const fetchTodos = () => {
         "https://dummyjson.com/todos?limit=3&skip=1"
       );
       const data = await response.json();
+      if(isPresentInStorage(data.todos[0].id)){
+        dispatch(fetchTodosSuccess())
+        return;
+      }
       const initialTodos = data.todos.map((item) => {
         const currDate = getDate();
         return {
-          id: uuidv4(),
+          id: item.id,
           text: item.todo,
           editTodo: false,
           isComplete: false,

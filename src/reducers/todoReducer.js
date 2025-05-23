@@ -1,7 +1,6 @@
 import {
   ADD_TODO,
   REMOVE_TODO,
-  TOGGLE_UPDATE,
   UPDATE_TODO,
   TOGGLE_DONE,
   FETCH_TODOS_REQUEST,
@@ -9,7 +8,7 @@ import {
   FETCH_TODOS_FAILURE,
 } from "../actions/todoActions";
 
-import getDate from "../utility/date";
+
 import { getInitialTodos } from "../utility/localStorage";
 
 const initialTodos = getInitialTodos();
@@ -36,22 +35,12 @@ const todoReducer = (state = initialState, action) => {
         }),
       };
 
-    case TOGGLE_UPDATE:
-      return {
-        ...state,
-        todos: state.todos.map((todo) => {
-          return todo.id === action.payload.id
-            ? { ...todo, editTodo: !todo.editTodo }
-            : todo;
-        }),
-      };
-
     case UPDATE_TODO:
       return {
         ...state,
         todos: state.todos.map((todo) => {
           return todo.id === action.payload.id
-            ? { ...todo, text: action.payload.text, date: getDate() }
+            ? action.payload
             : todo;
         }),
       };

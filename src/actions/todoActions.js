@@ -4,7 +4,6 @@ import { descriptions,priorities } from "../utility/constants";
 
 export const ADD_TODO = "ADD_TODO";
 export const REMOVE_TODO = "REMOVE_TODO";
-export const TOGGLE_UPDATE = "TOGGLE_UPDATE";
 export const UPDATE_TODO = "UPDATE_TODO";
 export const TOGGLE_DONE = "TOGGLE_DONE";
 export const FETCH_TODOS_REQUEST = "FETCH_TODOS_REQUEST";
@@ -21,14 +20,11 @@ export const removeTodo = (id) => ({
   payload: { id },
 });
 
-export const toggleUpdate = (id) => ({
-  type: TOGGLE_UPDATE,
-  payload: { id },
-});
 
-export const updateTodo = (id, text) => ({
+
+export const updateTodo = (todo) => ({
   type: UPDATE_TODO,
-  payload: { id, text },
+  payload: todo,
 });
 
 export const toggleDone = (id) => ({

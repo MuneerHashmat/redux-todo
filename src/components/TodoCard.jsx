@@ -7,12 +7,18 @@ import {
   CircleCheck,
   FilePenLine,
   Pencil,
-  Save,
+  SquareChevronRight,
   Trash2,
 } from "lucide-react";
+import { colors } from "../utility/constants";
 
-const TodoCard = ({ todo, setId, toggleDeleteModal }) => {
+const TodoCard = ({ todo, setId, toggleDeleteModal, setTodo, openModal }) => {
   const dispatch = useDispatch();
+
+  const handleEdit = () => {
+    setTodo(todo);
+    openModal();
+  };
 
   const handleDelete = () => {
     setId(todo.id);
@@ -38,23 +44,39 @@ const TodoCard = ({ todo, setId, toggleDeleteModal }) => {
         </button>
 
         <div className="todo-content">
-          <p
+          <div>
+            <p
             style={{
               textDecoration: todo.isComplete ? "line-through" : "none",
-              color: todo.isComplete ? "#948f85" : "#F0E3CA",
+              color: todo.isComplete ? "#948f85" : "#F0E3CA", 
             }}
           >
             {todo.title}
           </p>
-          <p style={{ fontSize: "10px" }}>
-            <FilePenLine size={17} style={{ paddingTop: "5px" }} /> {todo.date}
-          </p>
+          <p style={{ fontSize: "13px" }}>{todo.description}</p>
+          </div>
+          <div className="todo-desc">
+            
+            <div className="todo-info">
+              <div className="todo-info-item" style={{ fontSize: "11px" }}>
+                <FilePenLine size={13} /> <p>{todo.date}</p>
+              </div>
+              <div
+                className="todo-info-item"
+                style={{ fontSize: "11px", color: `${colors[todo.priority]}` }}
+              >
+                <SquareChevronRight size={13} />
+                <p>{todo.priority}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <div className="todo-buttons">
         <button
           disabled={todo.isComplete}
+          onClick={handleEdit}
           className={`btn-primary edit-btn ${
             todo.isComplete && "disabled-btn"
           }`}
@@ -74,6 +96,8 @@ TodoCard.propTypes = {
   todo: PropTypes.object,
   setId: PropTypes.func,
   toggleDeleteModal: PropTypes.func,
+  setTodo: PropTypes.func,
+  openModal: PropTypes.func,
 };
 
 export default TodoCard;

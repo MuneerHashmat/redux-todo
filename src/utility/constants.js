@@ -1,6 +1,6 @@
 export const descriptions = [
   {
-    desc: "Memorize an english poem written by TS Eliot by",
+    desc: "Memorize an english poem written by TS Eliot",
   },
   {
     desc: "Watch an old classic movie, maybe Jurassic Park",
@@ -12,18 +12,18 @@ export const descriptions = [
 
 export const priorities = [
   {
-    type: "low",
-    label:"Low",
-    color:"#56c932"
+    label: "Low",
   },
   {
-    type: "medium",
-    label:"Medium",
-    color:"#d1d115"
+    label: "Medium",
   },
   {
-    type:"high",
-    label:"High",
-    color:"#d1d115"
-  }
+    label: "High",
+  },
 ];
+
+export const colors = {
+  Low: "#56c932",
+  Medium: "#d1d115",
+  High: "#d60909",
+};

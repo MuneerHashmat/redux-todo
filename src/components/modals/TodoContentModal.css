@@ -5,6 +5,7 @@
     background-color: var(--dark-bg);
     padding: 30px 50px;
     width: 30vw;
+    border-top: 4px solid var(--brown-light);
 }
 
 .content-modal-window h2{

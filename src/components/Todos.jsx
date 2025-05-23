@@ -6,12 +6,27 @@ import { MoonLoader } from "react-spinners";
 import toast from "react-hot-toast";
 import TodoCard from "./TodoCard";
 import DeleteModal from "./modals/DeleteModal";
+import TodoContentModal from "./modals/TodoContentModal";
 
 const Todos = () => {
   const dispatch = useDispatch();
   const { todos, loading, error } = useSelector((state) => state);
   const [currId, setCurrId] = useState("");
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [currTodo, setCurrTodo] = useState(null);
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  const setTodo = (todo) => {
+    setCurrTodo(todo);
+  };
 
   const setId = (id) => {
     setCurrId(id);
@@ -60,6 +75,8 @@ const Todos = () => {
           todo={todo}
           setId={setId}
           toggleDeleteModal={toggleDeleteModal}
+          setTodo={setTodo}
+          openModal={openModal}
         />
       ))}
       <DeleteModal
@@ -67,6 +84,12 @@ const Todos = () => {
         currId={currId}
         deleteTodo={deleteTodo}
         toggleDeleteModal={toggleDeleteModal}
+      />
+      <TodoContentModal
+        type="edit"
+        todo={currTodo}
+        isOpen={isOpen}
+        closeModal={closeModal}
       />
     </div>
   );

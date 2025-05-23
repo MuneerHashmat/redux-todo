@@ -1,5 +1,6 @@
 import getDate from "../utility/date";
 import { isPresentInStorage } from "../utility/localStorage";
+import { descriptions,priorities } from "../utility/constants";
 
 export const ADD_TODO = "ADD_TODO";
 export const REMOVE_TODO = "REMOVE_TODO";
@@ -62,12 +63,13 @@ export const fetchTodos = () => {
         "https://dummyjson.com/todos?limit=3&skip=1"
       );
       const data = await response.json();
-      const initialTodos = data.todos.map((item) => {
+      const initialTodos = data.todos.map((item,idx) => {
         const currDate = getDate();
         return {
           id: item.id.toString(),
-          text: item.todo,
-          editTodo: false,
+          title: item.todo,
+          description: descriptions[idx].desc,
+          priority: priorities[idx].label,
           isComplete: false,
           date: currDate,
         };

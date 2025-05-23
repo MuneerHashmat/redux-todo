@@ -1,0 +1,57 @@
+@import "../../variables.css";
+
+.content-modal-window{
+    color: var(--light-primary);
+    background-color: var(--dark-bg);
+    padding: 30px 50px;
+    width: 30vw;
+}
+
+.content-modal-window h2{
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.content-modal-form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.text-input{
+    padding: 5px 10px;
+    background-color: var(--dark-bg);
+    border-radius: 5px;
+    border: 1px solid var(--brown-primary);
+    color: var(--light-primary);
+    width: 100%;
+}
+
+.text-input:focus{
+    outline: 1px solid var(--brown-light);
+}
+
+input{
+    font-size: large;
+}
+ textarea{
+    resize: none;
+ }
+
+ .content-modal-buttons{
+    width: 100%;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+ }
+
+ .content-modal-buttons button{
+    border-radius: 5px;
+    color: var(--light-primary);
+    width: 80px;
+    padding: 5px 0px;
+}
+
+

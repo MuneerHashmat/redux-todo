@@ -10,7 +10,6 @@
 }
 
 #root {
-  width: 100vw;
   min-height: 100vh;
   padding-top: 30px;
   background-color: var(--dark-primary);
@@ -29,7 +28,7 @@
 }
 
 .modal-container{
-  position: absolute;
+  position: fixed;
     top: 0;
     left: 0;
     z-index: 10;

@@ -74,13 +74,11 @@ const todoReducer = (state = initialState, action) => {
       };
 
     case FETCH_TODOS_SUCCESS:
-      return action.payload
-        ? {
-            ...state,
-            loading: false,
-            todos: action.payload,
-          }
-        : { ...state, loading: false };
+      return {
+        ...state,
+        loading:false,
+        todos: [...state.todos, ...action.payload],
+      };
 
     case FETCH_TODOS_FAILURE:
       return {

@@ -47,23 +47,25 @@ const fetchTodosFailure = (error) => ({
   error: error.message,
 });
 
-
 export const fetchTodos = () => {
   return async (dispatch) => {
+    if (
+      isPresentInStorage("2") ||
+      isPresentInStorage("3") ||
+      isPresentInStorage("4")
+    ) {
+      return;
+    }
     dispatch(fetchTodosRequest());
     try {
       const response = await fetch(
         "https://dummyjson.com/todos?limit=3&skip=1"
       );
       const data = await response.json();
-      if(isPresentInStorage(data.todos[0].id)){
-        dispatch(fetchTodosSuccess())
-        return;
-      }
       const initialTodos = data.todos.map((item) => {
         const currDate = getDate();
         return {
-          id: item.id,
+          id: item.id.toString(),
           text: item.todo,
           editTodo: false,
           isComplete: false,

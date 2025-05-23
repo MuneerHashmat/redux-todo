@@ -54,4 +54,24 @@ input{
     padding: 5px 0px;
 }
 
+@media (max-width: 1024px){
+    .content-modal-window{
+        width: 55vw;
+    }
+}
+
+
+@media (max-width: 768px){
+    .content-modal-window{
+        width: 75vw;
+    }
+}
+
+
+@media (max-width: 640px){
+    .content-modal-window{
+        width: 90vw;
+    }
+}
+
 

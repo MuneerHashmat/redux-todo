@@ -13,8 +13,8 @@ const TodoContentModal = ({ isOpen, type, todo, closeModal }) => {
     title: "",
     description: "",
     priority: "",
+    deadline: "",
   };
-
 
   const [inputFields, setInputFields] = useState(initialState);
   useEffect(() => {
@@ -23,6 +23,7 @@ const TodoContentModal = ({ isOpen, type, todo, closeModal }) => {
         title: todo.title,
         description: todo.description,
         priority: todo.priority,
+        deadline: todo.deadline ? todo.deadline : "",
       });
     } else {
       setInputFields({
@@ -34,7 +35,7 @@ const TodoContentModal = ({ isOpen, type, todo, closeModal }) => {
   }, [todo, isOpen]);
 
   console.log(inputFields);
-  
+
   const dispatch = useDispatch();
 
   const handleOnChange = (key, value) => {
@@ -43,12 +44,8 @@ const TodoContentModal = ({ isOpen, type, todo, closeModal }) => {
 
   const handleOnSave = (e) => {
     e.preventDefault();
-    if (
-      !inputFields.title ||
-      !inputFields.description ||
-      !inputFields.priority
-    ) {
-      toast.error("All fields are required");
+    if (!inputFields.title) {
+      toast.error("Title is required");
       return;
     }
 
@@ -60,6 +57,7 @@ const TodoContentModal = ({ isOpen, type, todo, closeModal }) => {
         priority: inputFields.priority,
         isComplete: false,
         date: getDate(),
+        deadline: inputFields.deadline,
       };
 
       dispatch(addTodo(newTodo));
@@ -72,8 +70,9 @@ const TodoContentModal = ({ isOpen, type, todo, closeModal }) => {
         priority: inputFields.priority,
         isComplete: false,
         date: getDate(),
+        deadline: inputFields.deadline,
       };
-      dispatch(updateTodo(newTodo))
+      dispatch(updateTodo(newTodo));
     }
 
     setInputFields({
@@ -102,7 +101,7 @@ const TodoContentModal = ({ isOpen, type, todo, closeModal }) => {
             type="text"
             value={inputFields.title}
             onChange={(e) => handleOnChange("title", e.target.value)}
-            placeholder="title"
+            placeholder="title*"
             className="text-input"
           />
           <textarea
@@ -113,18 +112,31 @@ const TodoContentModal = ({ isOpen, type, todo, closeModal }) => {
             onChange={(e) => handleOnChange("description", e.target.value)}
           ></textarea>
 
-          <select
-            value={inputFields.priority}
-            onChange={(e) => handleOnChange("priority", e.target.value)}
-            className="text-input"
-          >
-            <option value="">Priority</option>
-            {priorities.map((item) => (
-              <option key={item.label} value={item.label}>
-                {item.label}
-              </option>
-            ))}
-          </select>
+          <div className="input-container">
+            <p>Priority*</p>
+            <select
+              value={inputFields.priority}
+              onChange={(e) => handleOnChange("priority", e.target.value)}
+              className="text-input"
+            >
+              {priorities.map((item) => (
+                <option key={item.label} value={item.label}>
+                  {item.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="input-container">
+            <p>Deadline</p>
+            <input
+              type="date"
+              className="text-input"
+              value={inputFields.deadline}
+              onChange={(e) => handleOnChange("deadline", e.target.value)}
+              min={new Date().toISOString().split("T")[0]}
+            />
+          </div>
 
           <div className="content-modal-buttons">
             <button type="submit" className="btn-primary">

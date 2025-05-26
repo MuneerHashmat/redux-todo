@@ -5,6 +5,7 @@ import { toggleDone } from "../actions/todoActions";
 import {
   Circle,
   CircleCheck,
+  Clock,
   FilePenLine,
   Pencil,
   SquareChevronRight,
@@ -46,21 +47,17 @@ const TodoCard = ({ todo, setId, toggleDeleteModal, setTodo, openModal }) => {
         <div className="todo-content">
           <div>
             <p
-            style={{
-              textDecoration: todo.isComplete ? "line-through" : "none",
-              color: todo.isComplete ? "#948f85" : "#F0E3CA", 
-            }}
-          >
-            {todo.title}
-          </p>
-          <p style={{ fontSize: "13px" }}>{todo.description}</p>
+              style={{
+                textDecoration: todo.isComplete ? "line-through" : "none",
+                color: todo.isComplete ? "#948f85" : "#F0E3CA",
+              }}
+            >
+              {todo.title}
+            </p>
+            <p style={{ fontSize: "13px" }}>{todo.description}</p>
           </div>
           <div className="todo-desc">
-            
             <div className="todo-info">
-              <div className="todo-info-item" style={{ fontSize: "11px" }}>
-                <FilePenLine size={13} /> <p>{todo.date}</p>
-              </div>
               <div
                 className="todo-info-item"
                 style={{ fontSize: "11px", color: `${colors[todo.priority]}` }}
@@ -68,6 +65,16 @@ const TodoCard = ({ todo, setId, toggleDeleteModal, setTodo, openModal }) => {
                 <SquareChevronRight size={13} />
                 <p>{todo.priority}</p>
               </div>
+
+              {todo.deadline && !todo.isComplete && (
+                <div
+                  className="todo-info-item"
+                  style={{ fontSize: "11px", color: "#5295f2" }}
+                >
+                  <Clock size={13} />
+                  <p>{todo.deadline.split("-").reverse().join("-")}</p>
+                </div>
+              )}
             </div>
           </div>
         </div>

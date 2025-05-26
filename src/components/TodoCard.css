@@ -29,13 +29,14 @@
 .todo-desc {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 0;
 }
 
 .todo-info {
   display: flex;
-  gap: 100px;
+  gap: 70px;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .todo-info-item {

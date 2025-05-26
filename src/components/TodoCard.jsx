@@ -80,20 +80,25 @@ const TodoCard = ({ todo, setId, toggleDeleteModal, setTodo, openModal }) => {
         </div>
       </div>
 
-      <div className="todo-buttons">
-        <button
-          disabled={todo.isComplete}
-          onClick={handleEdit}
-          className={`btn-primary edit-btn ${
-            todo.isComplete && "disabled-btn"
-          }`}
-        >
-          <Pencil color={!todo.isComplete ? "#FF8303" : "#945b21"} />
-        </button>
+      <div className="todo-data">
+        <div className="todo-buttons">
+          <button
+            disabled={todo.isComplete}
+            onClick={handleEdit}
+            className={`btn-primary edit-btn ${
+              todo.isComplete && "disabled-btn"
+            }`}
+          >
+            <Pencil color={!todo.isComplete ? "#FF8303" : "#945b21"} />
+          </button>
 
-        <button onClick={handleDelete} className="btn-primary delete-btn">
-          <Trash2 color="#FF8303" />
-        </button>
+          <button onClick={handleDelete} className="btn-primary delete-btn">
+            <Trash2 color="#FF8303" />
+          </button>
+        </div>
+        <div className="todo-info-item" style={{ fontSize: "10px", color:"#8c8577" }}>
+          <FilePenLine size={11} /> <p>{todo.date}</p>
+        </div>
       </div>
     </div>
   );

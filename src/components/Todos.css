@@ -1,27 +1,76 @@
 @import "../variables.css";
 
-.todo-container{
-    width: 100%;
-    margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+.tabs-container {
+  width: 100%;
+  display: flex;
+  margin-top: 40px;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.no-todos{
-    margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
+.tab-btn {
+  border: 1px solid var(--brown-primary);
+  background-color: var(--dark-bg);
+  color: var(--light-primary);
+  padding: 5px 0;
+  border-radius: 5px;
+  width: 150px;
+  font-size: 17px;
 }
 
-.no-todos hr{
- border: 2px solid var(--brown-light);
- width: 115px;
+.tab-active {
+  background-color: var(--brown-light);
+  border: 1px solid var(--brown-light);
+  color: black;
+  font-weight: 500;
 }
 
-.no-todos h2{
-    color: var(--light-primary);
+.tab-btn:hover {
+  cursor: pointer;
+}
+
+.todo-container {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  animation: slideDown 0.5s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.no-todos {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.no-todos hr {
+  border: 2px solid var(--brown-light);
+  width: 115px;
+}
+
+.no-todos h2 {
+  color: var(--light-primary);
+}
+
+@media (max-width: 768px) {
+  .tab-btn {
+    border-radius: 5px;
+    width: 100px;
+    font-size: small;
+  }
 }

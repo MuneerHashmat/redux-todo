@@ -7,6 +7,8 @@ import toast from "react-hot-toast";
 import TodoCard from "./TodoCard";
 import DeleteModal from "./modals/DeleteModal";
 import TodoContentModal from "./modals/TodoContentModal";
+import { tabs } from "../utility/constants";
+import { filterTodos } from "../utility/filterTodos";
 
 const Todos = () => {
   const dispatch = useDispatch();
@@ -15,7 +17,25 @@ const Todos = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [currTodo, setCurrTodo] = useState(null);
+  const [currTab, setCurrTab] = useState(tabs[0].name);
 
+  useEffect(() => {
+    dispatch(fetchTodos());
+  }, [dispatch]);
+
+  let filteredTodos = filterTodos(todos, currTab);
+
+  filteredTodos.sort((a, b) => {
+    const priorityOrder = {
+      High: 3,
+      Medium: 2,
+      Low: 1,
+    };
+
+    return priorityOrder[b.priority] - priorityOrder[a.priority];
+  });
+
+  
   const openModal = () => {
     setIsOpen(true);
   };
@@ -39,10 +59,6 @@ const Todos = () => {
   const deleteTodo = (id) => {
     dispatch(removeTodo(id));
   };
-
-  useEffect(() => {
-    dispatch(fetchTodos());
-  }, [dispatch]);
 
   if (error) {
     toast.error("failed to fetch todos");
@@ -68,30 +84,43 @@ const Todos = () => {
   }
 
   return (
-    <div className="todo-container">
-      {todos.map((todo) => (
-        <TodoCard
-          key={todo.id}
-          todo={todo}
-          setId={setId}
+    <>
+      <div className="tabs-container">
+        {tabs.map((tab) => (
+          <button
+            className={`tab-btn ${tab.name === currTab && "tab-active"}`}
+            onClick={() => setCurrTab(tab.name)}
+            key={tab.name}
+          >
+            {tab.name}
+          </button>
+        ))}
+      </div>
+      <div className="todo-container">
+        {filteredTodos.map((todo) => (
+          <TodoCard
+            key={todo.id}
+            todo={todo}
+            setId={setId}
+            toggleDeleteModal={toggleDeleteModal}
+            setTodo={setTodo}
+            openModal={openModal}
+          />
+        ))}
+        <DeleteModal
+          isDeleteModalOpen={isDeleteModalOpen}
+          currId={currId}
+          deleteTodo={deleteTodo}
           toggleDeleteModal={toggleDeleteModal}
-          setTodo={setTodo}
-          openModal={openModal}
         />
-      ))}
-      <DeleteModal
-        isDeleteModalOpen={isDeleteModalOpen}
-        currId={currId}
-        deleteTodo={deleteTodo}
-        toggleDeleteModal={toggleDeleteModal}
-      />
-      <TodoContentModal
-        type="edit"
-        todo={currTodo}
-        isOpen={isOpen}
-        closeModal={closeModal}
-      />
-    </div>
+        <TodoContentModal
+          type="edit"
+          todo={currTodo}
+          isOpen={isOpen}
+          closeModal={closeModal}
+        />
+      </div>
+    </>
   );
 };
 

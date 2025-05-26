@@ -27,3 +27,15 @@ export const colors = {
   Medium: "#d1d115",
   High: "#d60909",
 };
+
+export const tabs=[
+  {
+    name:"All"
+  },
+  {
+    name:"Pending"
+  },
+  {
+    name:"Completed"
+  }
+]

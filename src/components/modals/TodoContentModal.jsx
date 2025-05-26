@@ -12,7 +12,7 @@ const TodoContentModal = ({ isOpen, type, todo, closeModal }) => {
   let initialState = {
     title: "",
     description: "",
-    priority: "",
+    priority: "Low",
     deadline: "",
   };
 
@@ -22,14 +22,14 @@ const TodoContentModal = ({ isOpen, type, todo, closeModal }) => {
       setInputFields({
         title: todo.title,
         description: todo.description,
-        priority: todo.priority,
+        priority: todo.priority || "Low",
         deadline: todo.deadline ? todo.deadline : "",
       });
     } else {
       setInputFields({
         title: "",
         description: "",
-        priority: "",
+        priority: "Low",
       });
     }
   }, [todo, isOpen]);

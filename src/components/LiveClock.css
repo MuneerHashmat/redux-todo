@@ -1,0 +1,19 @@
+@import "../variables.css";
+
+.clock-container{
+    border-radius: 5px;
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    color: var(--light-primary);
+}
+
+.clock-container h1{
+    font-size: 17px;
+}
+
+.clock-container p{
+    font-size: small;
+}
+

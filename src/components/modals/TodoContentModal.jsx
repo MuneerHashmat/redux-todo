@@ -49,6 +49,16 @@ const TodoContentModal = ({ isOpen, type, todo, closeModal }) => {
       return;
     }
 
+    if (inputFields.title.length > 45) {
+      toast.error("Title can't be more than 45 characters");
+      return;
+    }
+
+    if (inputFields.description.length > 150) {
+      toast.error("Description can't be more than 150 characters");
+      return;
+    }
+
     if (type === "create") {
       let newTodo = {
         id: uuidv4(),
@@ -101,11 +111,11 @@ const TodoContentModal = ({ isOpen, type, todo, closeModal }) => {
             type="text"
             value={inputFields.title}
             onChange={(e) => handleOnChange("title", e.target.value)}
-            placeholder="title*"
+            placeholder="Title*"
             className="text-input"
           />
           <textarea
-            rows={3}
+            rows={4}
             placeholder="Description"
             className="text-input"
             value={inputFields.description}

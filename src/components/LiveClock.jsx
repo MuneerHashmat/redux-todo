@@ -1,4 +1,3 @@
-import "./LiveClock.css";
 import { useState, useEffect } from "react";
 
 const LiveClock = () => {
@@ -24,9 +23,9 @@ const LiveClock = () => {
   });
 
   return (
-    <div className="clock-container">
-      <h1>{formattedTime}</h1>
-      <p>{formattedDate}</p>
+    <div className="flex flex-col gap-[2px]">
+      <h1 className="text-[17px] font-semibold">{formattedTime}</h1>
+      <p className="text-xs">{formattedDate}</p>
     </div>
   );
 };

@@ -1,4 +1,3 @@
-import "./Todos.css";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTodos, removeTodo } from "../actions/todoActions";
@@ -67,7 +66,7 @@ const Todos = () => {
 
   if (loading) {
     return (
-      <div className="todo-container">
+      <div className="w-full mt-[20px] flex flex-col items-center gap-[20px]">
         <MoonLoader color="#FF8303" />
       </div>
     );
@@ -75,20 +74,20 @@ const Todos = () => {
 
   if (todos.length === 0) {
     return (
-      <div className="no-todos">
-        <hr />
-        <h2>No todos</h2>
-        <hr />
+      <div className="mt-[40px] flex flex-col items-center gap-[5px]">
+        <hr className="border-2 border-[var(--brown-light)] w-[115px]"/>
+        <h2 className="text-2xl">No todos</h2>
+        <hr className="border-2 border-[var(--brown-light)] w-[115px]"/>
       </div>
     );
   }
 
   return (
     <>
-      <div className="tabs-container">
+      <div className="w-full mt-[40px] flex justify-between items-center">
         {tabs.map((tab) => (
           <button
-            className={`tab-btn ${tab.name === currTab && "tab-active"}`}
+            className={` border border-[var(--brown-primary)] w-[100px] sm:w-[150px] text-sm sm:text-[17px] py-[5px] rounded-[5px] cursor-pointer  ${tab.name === currTab ? "border-[var(--brown-light)] text-black font-semibold bg-[#FF8303]" : "bg-[var(--dark-bg)]"}`}
             onClick={() => setCurrTab(tab.name)}
             key={tab.name}
           >
@@ -96,7 +95,7 @@ const Todos = () => {
           </button>
         ))}
       </div>
-      <div className="todo-container">
+      <div className="w-full mt-[20px] flex flex-col items-center gap-[20px] slide-down">
         {filteredTodos.map((todo) => (
           <TodoCard
             key={todo.id}

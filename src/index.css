@@ -1,47 +1,58 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-@import "./variables.css";
+@import "tailwindcss";
 
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+@layer base {
+  :root {
+    --dark-primary: #1b1a17;
+    --dark-secondary: #242320;
+    --dark-bg: #1f1e1b;
+    --brown-primary: #a35709;
+    --brown-light: #ff8303;
+    --light-primary: #f0e3ca;
+  }
+
+  * {
+    font-family: "Poppins", sans-serif;
+  }
 }
 
-#root {
-  min-height: 100vh;
-  padding-top: 30px;
-  padding-bottom: 20px;
-  background-color: var(--dark-primary);
+@layer components {
+  .btn-primary {
+    @apply bg-[var(--dark-bg)] rounded-[10px] border border-[var(--brown-primary)] transition-all;
+  }
+
+  .btn-primary:hover {
+    @apply cursor-pointer scale-[1.01];
+  }
+
+  .text-input {
+    @apply w-full px-[10px] py-[5px] rounded-[5px] border border-[var(--brown-primary)] bg-[var(--dark-bg)];
+  }
+
+  .text-input:focus {
+    @apply outline outline-[var(--brown-light)];
+  }
+
+  .modal-container {
+    background-color: rgba(0, 0, 0, 0.6);
+    @apply fixed top-0 left-0 z-10 w-screen h-screen flex justify-center items-center;
+  }
 }
 
-.btn-primary {
-  background-color: var(--dark-bg);
-  border-radius: 10px;
-  border: 1px solid var(--brown-primary);
-  transition: all 0.1s ease-in-out;
-}
+@layer utilities {
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
-.btn-primary:hover {
-  cursor: pointer;
-  transform: scale(102%);
-}
-
-.modal-container{
-  position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0,0,0,0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    display: none;
-}
-
-.visible{
-  display: flex;
+  .slide-down {
+    animation: slideDown 0.5s ease-out;
+  }
 }

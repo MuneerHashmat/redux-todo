@@ -1,4 +1,3 @@
-import "./TodoCard.css";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { toggleDone } from "../actions/todoActions";
@@ -27,101 +26,87 @@ const TodoCard = ({ todo, setId, toggleDeleteModal, setTodo, openModal }) => {
     toggleDeleteModal();
   };
   return (
-    <div className="todo-card">
-      <div className="todo-main">
+    <div className="w-full border border-[var(--brown-primary)] rounded-[10px] bg-[var(--dark-bg)] pt-[10px] pb-[7px] px-[10px] flex justify-between items-center">
+      <div className="flex w-[80%] items-center gap-[20px] text-lg">
         <button
           onClick={() => dispatch(toggleDone(todo.id))}
-          disabled={todo.editTodo}
-          className={`btn-primary toggle-done ${
-            todo.editTodo && "disabled-btn"
-          }`}
+          className="btn-primary border-none pt-[5px] hover:scale-100"
         >
           {!todo.isComplete ? (
-            <Circle color={!todo.editTodo ? "#FF8303" : "#945b21"} />
+            <Circle color="#FF8303" />
           ) : (
-            <CircleCheck
-              style={{ backgroundColor: "#FF8303", borderRadius: "50%" }}
-            />
+            <CircleCheck className="text-black bg-[#FF8303] rounded-[50%]" />
           )}
         </button>
 
-        <div className="todo-content">
+        <div className="flex flex-col gap-[15px]">
           <div>
             <p
-              style={{
-                textDecoration: todo.isComplete ? "line-through" : "none",
-                color: todo.isComplete ? "#948f85" : "#F0E3CA",
-              }}
+              className={
+                todo.isComplete
+                  ? "text-[#948f85] line-through"
+                  : "text-[#F0E3CA]"
+              }
             >
               {todo.title}
             </p>
             <p
-              style={{ fontSize: "13px", color: !todo.description && "#948f85" }}
+              className={`text-[13px] ${!todo.description && "text-[#948f85]"}`}
             >
               {todo.description ? todo.description : "No description"}
             </p>
           </div>
-          <div className="todo-desc">
-            <div className="todo-info">
-              <div
-                className="todo-info-item"
-                style={{ fontSize: "11px", color: `${colors[todo.priority]}` }}
-              >
-                <SquareChevronRight size={13} />
-                <p style={{ width: "45px" }}>{todo.priority}</p>
-              </div>
 
-              {!todo.isComplete ? (
-                <div
-                  className="todo-info-item"
-                  style={{
-                    fontSize: "11px",
-                    color: todo.deadline ? "#5295f2" : "#3361a1",
-                  }}
-                >
-                  <Clock size={13} />
-                  <p>
-                    {todo.deadline
-                      ? todo.deadline.split("-").reverse().join("-")
-                      : "no deadline"}
-                  </p>
-                </div>
-              ) : (
-                <div
-                  className="todo-info-item"
-                  style={{
-                    fontSize: "11px",
-                    color: "#6cc23e",
-                  }}
-                >
-                  <CircleCheckBig size={13} />
-                  <p>Completed</p>
-                </div>
-              )}
+          <div className="flex gap-[10px] sm:gap-[70px] items-center flex-wrap">
+            <div
+              className={`flex gap-[3px] items-center text-[11px]`}
+              style={{ color: `${colors[todo.priority]}` }}
+            >
+              <SquareChevronRight size={13} />
+              <p className="w-[45px]">{todo.priority}</p>
             </div>
+
+            {!todo.isComplete ? (
+              <div
+                className={`flex gap-[3px] items-center text-[11px] ${
+                  todo.deadline ? "text-[#5295f2]" : "text-[#3361a1]"
+                }`}
+              >
+                <Clock size={13} />
+                <p>
+                  {todo.deadline
+                    ? todo.deadline.split("-").reverse().join("-")
+                    : "no deadline"}
+                </p>
+              </div>
+            ) : (
+              <div className="flex gap-[3px] items-center text-[11px] text-[#6cc23e]">
+                <CircleCheckBig size={13} />
+                <p>Completed</p>
+              </div>
+            )}
           </div>
         </div>
       </div>
 
-      <div className="todo-data">
-        <div className="todo-buttons">
+      <div className="flex flex-col gap-[17px]">
+        <div className="flex gap-[10px] items-center">
           <button
             disabled={todo.isComplete}
             onClick={handleEdit}
-            className={`btn-primary edit-btn ${
-              todo.isComplete && "disabled-btn"
+            className={`btn-primary p-[5px] rounded-[5px] ${
+              todo.isComplete && "cursor-not-allowed hover:scale-100"
             }`}
           >
             <Pencil color={!todo.isComplete ? "#FF8303" : "#945b21"} />
           </button>
 
-          <button onClick={handleDelete} className="btn-primary delete-btn">
+          <button onClick={handleDelete} className="btn-primary p-[5px] rounded-[5px]">
             <Trash2 color="#FF8303" />
           </button>
         </div>
         <div
-          className="todo-info-item"
-          style={{ fontSize: "10px", color: "#8c8577" }}
+          className="flex gap-[3px] items-center text-[10px] text-[#8c8577]"
         >
           <FilePenLine size={11} /> <p>{todo.date}</p>
         </div>

@@ -1,4 +1,4 @@
-import "./TodoContentModal.css";
+
 import PropTypes from "prop-types";
 import { priorities } from "../../utility/constants";
 import { useEffect, useState } from "react";
@@ -103,31 +103,31 @@ const TodoContentModal = ({ isOpen, type, todo, closeModal }) => {
   };
 
   return (
-    <div className={`modal-container ${isOpen && "visible"}`}>
-      <div className="content-modal-window">
-        <h2>{type == "create" ? "Create a new Todo" : "Edit Todo"}</h2>
-        <form onSubmit={handleOnSave} className="content-modal-form">
+    <div className={`modal-container ${!isOpen && "hidden"}`}>
+      <div className="bg-[var(--dark-bg)] px-[10px] sm:px-[50px] py-[30px] w-[90vw] md:w-[70vw] lg:w-[40vw] xl:w-[30vw] border-t-3 border-[var(--brown-light)]">
+        <h2 className="text-[24px] text-center mb-[20px] font-semibold">{type == "create" ? "Create a new Todo" : "Edit Todo"}</h2>
+        <form onSubmit={handleOnSave} className="flex flex-col gap-[15px]">
           <input
             type="text"
             value={inputFields.title}
             onChange={(e) => handleOnChange("title", e.target.value)}
             placeholder="Title*"
-            className="text-input"
+            className="text-input text-lg"
           />
           <textarea
             rows={4}
             placeholder="Description"
-            className="text-input"
+            className="text-input resize-none"
             value={inputFields.description}
             onChange={(e) => handleOnChange("description", e.target.value)}
           ></textarea>
 
-          <div className="input-container">
+          <div className="flex gap-[10px] items-center">
             <p>Priority*</p>
             <select
               value={inputFields.priority}
               onChange={(e) => handleOnChange("priority", e.target.value)}
-              className="text-input"
+              className="text-input text-md"
             >
               {priorities.map((item) => (
                 <option key={item.label} value={item.label}>
@@ -137,22 +137,22 @@ const TodoContentModal = ({ isOpen, type, todo, closeModal }) => {
             </select>
           </div>
 
-          <div className="input-container">
+          <div className="flex gap-[10px] items-center">
             <p>Deadline</p>
             <input
               type="date"
-              className="text-input"
+              className="text-input text-sm" 
               value={inputFields.deadline}
               onChange={(e) => handleOnChange("deadline", e.target.value)}
               min={new Date().toISOString().split("T")[0]}
             />
           </div>
 
-          <div className="content-modal-buttons">
-            <button type="submit" className="btn-primary">
+          <div className="w-full flex gap-[30px] justify-center items-center mt-[25px]">
+            <button type="submit" className="btn-primary rounded-[5px] w-[80px] py-[5px]">
               Save
             </button>
-            <button onClick={handleClose} type="button" className="btn-primary">
+            <button onClick={handleClose} type="button" className="btn-primary rounded-[5px] w-[80px] py-[5px]">
               Close
             </button>
           </div>
